@@ -1,3 +1,8 @@
 wifite=false
 airgeddon=false
 aircrack-ng=false
+apache2=false
+ssh=false 
+dnsmasq=false 
+dhcpcd=false 
+hostapd=false 
