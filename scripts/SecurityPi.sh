@@ -13,7 +13,7 @@ config_files="dhcpcd.conf dnsmasq.conf hostapd.conf"
 setup() {
     echo "Pi Security written by GingerCam"
     echo "Applying config"
-    for file in config_files; do 
+    for file in $config_files; do 
     wget https://raw.githubusercontent.com/GingerCam/Pi-0w-security/master/config/$file -o /etc/$file
     
     if grep -q "DAEMON_CONF="/etc/hostapd.conf"" "/etc/default/hostapd"; then
