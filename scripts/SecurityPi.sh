@@ -44,7 +44,6 @@ setup() {
     echo ""
     apt update
     apt install kali-linux-headless airgeddon git whiptail cmatrix
-    
 }
 
 evillimiter () {
