@@ -15,7 +15,7 @@ setup() {
     echo "Applying config"
     for file in $config_files; do 
     wget https://raw.githubusercontent.com/GingerCam/Pi-0w-security/master/config/$file -o /etc/$file
-    
+    done
     if grep -q "DAEMON_CONF="/etc/hostapd.conf"" "/etc/default/hostapd"; then
         echo 1
     else
