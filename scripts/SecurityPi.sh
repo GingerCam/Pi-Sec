@@ -84,6 +84,14 @@ anonsurf () {
     cd ~
 }
 
+All () {
+    wifipumpkin3
+    evillimiter 
+    lscript
+    pishrink
+    anonsurf
+}
+
 git_repos () {
     selection=$(whiptail --title "Github repos" --separate-output --checklist Choose:"" "${r}" "${c}" \
     "wifipumpkin3" "" off \
