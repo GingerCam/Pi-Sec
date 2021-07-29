@@ -12,6 +12,7 @@ config_files="dhcpcd.conf dnsmasq.conf hostapd.conf"
 
 
 echo "Pi Security written by GingerCam"
+apt install hostapd dnsmasq dhcpcd
 echo "Applying config"
 for file in $config_files; do 
     curl https://raw.githubusercontent.com/GingerCam/Pi-0w-security/master/config/$file -o /etc/$file
