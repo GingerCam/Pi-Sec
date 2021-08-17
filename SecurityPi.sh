@@ -12,10 +12,10 @@ config_files="dhcpcd.conf dnsmasq.conf hostapd.conf"
 
 
 echo "Pi Security written by GingerCam"
-apt install hostapd dnsmasq dhcpcd
+apt install hostapd dnsmasq dhcpcd git
 echo "Applying config"
-for file in $config_files; do 
-    curl https://raw.githubusercontent.com/GingerCam/Pi-0w-security/master/config/$file -o /etc/$file
+for file in config/; do
+    cp file /etc
 done
 if grep -q "DAEMON_CONF="/etc/hostapd.conf"" "/etc/default/hostapd"; then
     echo 1
@@ -45,6 +45,7 @@ echo "ssh server is configured"
 echo ""
 apt update
 apt install kali-linux-headless airgeddon git whiptail 
+sudo loadkeys uk
 
 evillimiter () {
     git clone https://github.com/bitbrute/evillimiter.git
@@ -83,16 +84,26 @@ anonsurf () {
     cd ~
 }
 
+Nightmare() {
+    git clone https://github.com/GingerCam/Nightmare.git
+    cd Nightmare
+    chmod +x setup.sh
+    sudo ./setup.sh install global
+    cd ~
+}
+
 All () {
     wifipumpkin3
     evillimiter 
     lscript
     pishrink
     anonsurf
+    Nightmare
 }
 
 git_repos () {
     selection=$(whiptail --title "Github repos" --separate-output --checklist Choose:"" "${r}" "${c}" \
+    "Nightmare" "" on \    
     "wifipumpkin3" "" off \
     "evillimiter" "" off \
     "pishrink" "" off \
