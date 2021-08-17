@@ -12,6 +12,7 @@ config_files="dhcpcd.conf dnsmasq.conf hostapd.conf"
 
 
 echo "Pi Security written by GingerCam"
+sudo bash scripts/rpi-wiggle.sh
 apt install hostapd dnsmasq dhcpcd5 git python3 python3-pip
 wireless_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 echo "Applying config"
