@@ -15,4 +15,10 @@ cd Pi-Sec
 
 chmod +x SecurityPi.sh
 
+chmod +x scripts/rpi-wiggle.sh
+
+sudo ./rpi-wiggle.sh
+
+the script will reboot the system and finaly:
+
 sudo ./SecurityPi.sh

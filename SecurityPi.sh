@@ -12,11 +12,11 @@ config_files="dhcpcd.conf dnsmasq.conf hostapd.conf"
 
 
 echo "Pi Security written by GingerCam"
-apt install hostapd dnsmasq dhcpcd5 git
+apt install hostapd dnsmasq dhcpcd5 git python3 python3-pip
 wireless_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 echo "Applying config"
 for file in $config_files; do
-    cp config/file /etc/
+    cp config/$file /etc/
 done
 if grep -q "DAEMON_CONF="/etc/hostapd.conf"" "/etc/default/hostapd"; then
     echo 1
