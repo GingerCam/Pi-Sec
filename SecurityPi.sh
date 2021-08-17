@@ -31,12 +31,6 @@ else
     sed -i "s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/" /etc/sysctl.conf
 fi
 echo ""
-echo "Setting up wireless location to GB"
-wpa_cli -i $wireless_interface set country GB 
-wpa_cli -i $wireless_interface save_config >/dev/null 2>&1 
-rfkill unblock wifi
-sleep 1
-echo "Set"
 echo "Setting up ssh server"
 ssh-keygen -A
 update-rc.d ssh enable
