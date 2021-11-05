@@ -16,12 +16,13 @@ sudo bash scripts/rpi-wiggle.sh
 apt install hostapd dnsmasq dhcpcd5 git python3 python3-pip
 wireless_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 echo "Applying config"
-for file in $config_files; do
-    cp config/$file /etc/
-done
-if grep -q "DAEMON_CONF="/etc/hostapd.conf"" "/etc/default/hostapd"; then
-    echo 1
-else
+cp config/dhcpcd.conf /etc/
+cp config/hostpad.conf /etc/
+cp config/dnsmasq.conf /etc/ 
+cp scripts/rpi-wiggle.sh /usr/bin/
+chmod +x /usr/bin/rpi-wiggle.sh
+
+if ! grep -q "DAEMON_CONF="/etc/hostapd.conf"" "/etc/default/hostapd"; then
     echo ""DAEMON_CONF="/etc/hostapd.conf" >>"/etc/default/hostapd"
 fi
 sleep 2
@@ -31,6 +32,10 @@ if grep -q "^net.ipv4.ip_forward=1" /etc/sysctl.conf; then
 else
     sed -i "s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/" /etc/sysctl.conf
 fi
+
+sudo systemctl enable --now dnsmasq
+sudo systemctl enable --now dhcpcd
+
 echo ""
 echo "Setting up ssh server"
 ssh-keygen -A
@@ -97,22 +102,6 @@ All () {
     Nightmare
 }
 
-git_repos () {
-    selection=$(whiptail --title "Github repos" --separate-output --checklist Choose:"" "${r}" "${c}" \
-    "Nightmare" "" on \    
-    "wifipumpkin3" "" off \
-    "evillimiter" "" off \
-    "pishrink" "" off \
-    "lscript" "" off \
-    "anonsurf" "" off \
-    "All" "" off \
-    3>&1 1>&2 2>&3)
-
-    for repo in $selection; do 
-        $repo ()
-    done
-}
-
-git_repos
+All
 
 echo "export PS1="\[\e[32m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\]\[\e[32m\]:\[\e[m\]\[\e[32m\]~\[\e[m\]\[\e[32m\]\\$\[\e[m\] "" >> ~/.bashrc
