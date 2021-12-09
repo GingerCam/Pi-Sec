@@ -45,7 +45,7 @@ echo ""
 echo "ssh server is configured"
 echo ""
 apt update
-apt install kali-linux-headless airgeddon git whiptail 
+apt install kali-linux-headless airgeddon git cmatrix hollywood
 sudo loadkeys uk
 
 evillimiter () {
